@@ -5,6 +5,7 @@ import Footer from './components/Footer.jsx'
 import RegisterPage from './components/Register.jsx'
 import LoginPage from './components/Login.jsx'
 import Cart from './components/Cart.jsx'
+import Pizza from './components/Pizza.jsx'
 
 
 function App() {
@@ -14,7 +15,8 @@ function App() {
       {/* <Home /> */}
       {/*<RegisterPage />*/}
       {/*<LoginPage />*/}
-      <Cart/>
+      {/* <Cart/> */}
+      <Pizza />
       <Footer />
     </>
   )

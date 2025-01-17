@@ -34,3 +34,14 @@ Se adiciona lo siguiente:
 - Se agrega Cart.jsx
 - Se realiza llamado de arreglos desde pizza.js
 - Se agrega función sumar o quitar cantidad de producto
+
+## Hito 4 - Version: 0.0.3
+Se comentan los siguiente componentes:
+- Cart: pagina resumen de pago
+
+Se adiciona lo siguiente:
+- Componente Home se descomenta
+- Se agrega llamado de API con uso de effect
+- Se agrega componente Pizza
+- Se agrega llamado de API a url fija de pizza id p001
+- Componente Pizza se agrega diseño y se visualizan atributos solicitados.
