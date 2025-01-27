@@ -54,3 +54,7 @@ Se agrega:
 - Componente Profile y NotFound
 - Rdirección a pagina notFound con url /404
 - Botón de redireción a home desde pagina 404
+- link en regitro y profile
+
+Se quita:
+- onclick en botón de registro y profile
