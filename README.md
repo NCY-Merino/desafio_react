@@ -45,3 +45,12 @@ Se adiciona lo siguiente:
 - Se agrega componente Pizza
 - Se agrega llamado de API a url fija de pizza id p001
 - Componente Pizza se agrega diseño y se visualizan atributos solicitados.
+
+## Hito 5 - Version: 0.0.4
+Se agrega:
+- Liberia "react-router-dom"
+- Carpeta pages y traslado de componentes a la misma
+- Rutas solicitadas
+- Componente Profile y NotFound
+- Rdirección a pagina notFound con url /404
+- Botón de redireción a home desde pagina 404

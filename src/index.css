@@ -1,3 +1,12 @@
+.imagen_triste {
+  background-image: url('./assets/img/pizza_triste.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 320px;
+  width: 100%;
+}
+
 header {
   background-image: url('./assets/Header.jpg');
   background-position: center;
@@ -9,6 +18,7 @@ header {
   flex-direction: column;
   position: relative;
 }
+
 
 header h1, header h4, header hr {
   z-index: 1;

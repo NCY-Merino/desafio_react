@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { pizzaCart } from '../assets/js/pizzas.js'
+import { pizzaCart } from '../../assets/js/pizzas.js'
 
 const Cart = () => {
     const [total, setTotal] = useState(0);
