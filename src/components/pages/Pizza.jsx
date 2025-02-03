@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
 const Pizza = () => {
-
     const [pizzaRes, setInfo] = useState([]);
 
     useEffect(() => {
@@ -45,7 +44,8 @@ const Pizza = () => {
                             <li className="list-group-item">
                                 <div className="d-flex col-12 justify-content-around my-4">
                                 <h4 className="text-center">Precio: ${new Intl.NumberFormat('es-CL').format(pizzaRes.price)}</h4>
-                                    <button type="button" className="btn btn-dark btn-sm">Añadir 🛒</button>
+                                    <button type="button" className="btn btn-dark btn-sm"
+                                    >Añadir 🛒</button>
                                 </div>
                             </li>
                         </ul>

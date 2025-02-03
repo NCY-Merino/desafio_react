@@ -12,47 +12,51 @@ import Pizza from './components/pages/Pizza.jsx'
 import Profile from './components/pages/Profile.jsx'
 import NotFound from './components/pages/NotFound.jsx'
 
+import PizzaProvider from "./components/context/Context.jsx";
+
 function App() {
   return (
     <>
-      <Navbar />
-      <Routes>
-        <Route
-          path="/"
-          element={<Home />}
-        />
-        <Route
-          path="/register"
-          element={<RegisterPage />}
-        />
-        <Route
-          path="/login"
-          element={<LoginPage />}
-        />
-        <Route
-          path="/cart"
-          element={<Cart />}
-        />
-        <Route
-          path="/pizza/p001"
-          element={<Pizza />}
-        />
-        <Route
-          path="/profile"
-          element={<Profile />}
-        />
-        <Route
-          path="/404"
-          element={<NotFound />}
-        />
+      <PizzaProvider>
+        <Navbar />
+        <Routes>
+          <Route
+            path="/"
+            element={<Home />}
+          />
+          <Route
+            path="/register"
+            element={<RegisterPage />}
+          />
+          <Route
+            path="/login"
+            element={<LoginPage />}
+          />
+          <Route
+            path="/cart"
+            element={<Cart />}
+          />
+          <Route
+            path="/pizza/p001"
+            element={<Pizza />}
+          />
+          <Route
+            path="/profile"
+            element={<Profile />}
+          />
+          <Route
+            path="/404"
+            element={<NotFound />}
+          />
 
-        <Route
-        path="*"
-        element={<Navigate to="/404" replace />}
-        />
+          <Route
+            path="*"
+            element={<Navigate to="/404" replace />}
+          />
 
-      </Routes>
-      <Footer />
+        </Routes>
+        <Footer />
+      </PizzaProvider>
     </>
   )
 }

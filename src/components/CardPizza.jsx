@@ -1,8 +1,36 @@
-import React, { useState, setShow } from 'react'
+import React, { useState, setShow, useContext } from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { PizzaContext } from '../components/context/Context'
+
 
 const CardPizza = (props) => {
+    const { data, setData } = useContext(PizzaContext);
+    const [pizza, setPizza] = useState({
+        id: "",
+        name: "",
+        price: 0,
+        count: 1,
+        img: "",
+      });
+    
+      const handleAdded = (_pizza) => {
+        const pizza = {
+            id: _pizza.id,
+            name: _pizza.name,
+            price: _pizza.price,
+            count: 1,
+            img: _pizza.img,
+        };
+        const existe = data.some(x => x.id === pizza.id);
+        if(!existe){
+            setData([...data, pizza]);
+            console.log("Pizza agregada");
+        } else {
+            console.log("Pizza agregada anteriormente"); 
+        }
+      };
+
     const isLast = props.pizza.ingredients.length - 1;
     const price = new Intl.NumberFormat('es-CL').format(props.pizza.price);
 
@@ -35,7 +63,7 @@ const CardPizza = (props) => {
 
                                 <div className="d-flex col-12 justify-content-around my-4">
                                     <button type="button" className="btn btn-outline-dark btn-sm" onClick={handleShow}>Ver más 👀</button>
-                                    <button type="button" className="btn btn-dark btn-sm">Añadir 🛒</button>
+                                    <button type="button" className="btn btn-dark btn-sm" onClick={() => handleAdded(props.pizza)}>Añadir 🛒</button>
                                 </div>
                             </li>
                         </ul>

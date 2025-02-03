@@ -58,3 +58,8 @@ Se agrega:
 
 Se quita:
 - onclick en botón de registro y profile
+
+## Hito 6 - Version: 0.0.5
+Se agregan 2 context:
+- CartContext para mostrar el valor final
+- PizzaContext para crear un arreglo de las pizzas añadidas
