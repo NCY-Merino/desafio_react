@@ -1,6 +1,7 @@
 import React, { useState, setShow, useContext } from 'react'
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { Link } from "react-router-dom";
 import { PizzaContext } from '../components/context/Context'
 
 
@@ -34,10 +35,10 @@ const CardPizza = (props) => {
     const isLast = props.pizza.ingredients.length - 1;
     const price = new Intl.NumberFormat('es-CL').format(props.pizza.price);
 
-    const [show, setShow] = useState(false);
-
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    // FUnciones para modal
+    // const [show, setShow] = useState(false);
+    // const handleClose = () => setShow(false);
+    // const handleShow = () => setShow(true);
 
     return (
         <>
@@ -62,7 +63,7 @@ const CardPizza = (props) => {
                                 <h4 className="text-center">Precio: ${price}</h4>
 
                                 <div className="d-flex col-12 justify-content-around my-4">
-                                    <button type="button" className="btn btn-outline-dark btn-sm" onClick={handleShow}>Ver más 👀</button>
+                                    <Link type="button" className="btn btn-outline-dark btn-sm" to={"/pizza/" + props.pizza.id} >Ver más 👀</Link>
                                     <button type="button" className="btn btn-dark btn-sm" onClick={() => handleAdded(props.pizza)}>Añadir 🛒</button>
                                 </div>
                             </li>
@@ -71,7 +72,7 @@ const CardPizza = (props) => {
                 </div>
             </div>
 
-            <Modal show={show} onHide={handleClose}>
+            {/* <Modal show={show} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>🍕 <b>Descripción</b></Modal.Title>
                 </Modal.Header>
@@ -95,7 +96,7 @@ const CardPizza = (props) => {
                         Close
                     </Button>
                 </Modal.Footer>
-            </Modal>
+            </Modal> */}
         </>
     )
 }

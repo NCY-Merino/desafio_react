@@ -1,16 +1,16 @@
 import React, { useContext } from 'react';
 import { Link } from "react-router-dom";
-import { CartContext } from "../components/context/Context"; // Importación corregida
+import { CartContext, TokenContext } from "../components/context/Context"; // Importación corregida
 
 const Navbar = () => {
-  // Acceder al contexto correctamente
+  // Acceder correctamente al contexto
   const { totalContext } = useContext(CartContext);
+  const { token, setTokenContext } = useContext(TokenContext); // ✅ Corrección aquí
 
   const total = new Intl.NumberFormat('es-CL').format(totalContext);
-  const [token, setToken] = React.useState(false);
 
   const handleLogin = () => {
-    setToken(!token);
+    setTokenContext(!token);
     console.log(token ? 'User logged out' : 'User logged in');
   };
 

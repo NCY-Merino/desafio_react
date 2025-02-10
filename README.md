@@ -63,3 +63,8 @@ Se quita:
 Se agregan 2 context:
 - CartContext para mostrar el valor final
 - PizzaContext para crear un arreglo de las pizzas añadidas
+
+## Hito 7 - Version 0.0.6
+- Se agrega llamado dinamico de pizza por id
+- Context de token 
+- redirección de paginas solicitadas

@@ -1,3 +1,4 @@
+import { useContext } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
 
 import './App.css'
@@ -12,12 +13,13 @@ import Pizza from './components/pages/Pizza.jsx'
 import Profile from './components/pages/Profile.jsx'
 import NotFound from './components/pages/NotFound.jsx'
 
-import PizzaProvider from "./components/context/Context.jsx";
+import {TokenContext} from "./components/context/Context.jsx";
 
 function App() {
+  let {token} = useContext(TokenContext);
+
   return (
     <>
-      <PizzaProvider>
         <Navbar />
         <Routes>
           <Route
@@ -26,23 +28,23 @@ function App() {
           />
           <Route
             path="/register"
-            element={<RegisterPage />}
+            element={ !token ? <RegisterPage /> : <Home />}
           />
           <Route
             path="/login"
-            element={<LoginPage />}
+            element={ !token ? <LoginPage /> : <Home />}
           />
           <Route
             path="/cart"
             element={<Cart />}
           />
           <Route
-            path="/pizza/p001"
+            path="/pizza/:id"
             element={<Pizza />}
           />
           <Route
             path="/profile"
-            element={<Profile />}
+            element={token ? <Profile /> : <LoginPage />}
           />
           <Route
             path="/404"
@@ -56,7 +58,6 @@ function App() {
 
         </Routes>
         <Footer />
-      </PizzaProvider>
     </>
   )
 }

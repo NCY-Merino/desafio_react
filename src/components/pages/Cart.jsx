@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { PizzaContext , CartContext} from '../context/Context.jsx'; // Asegúrate de importar correctamente
+import { PizzaContext , CartContext, TokenContext} from '../context/Context.jsx'; // Asegúrate de importar correctamente
 
 const Cart = () => {
   const { data, setData } = useContext(PizzaContext);
   const { totalContext, setTotalContext } = useContext(CartContext);
-
+  let {token} = useContext(TokenContext);
 
   const [total, setTotal] = useState(0);
   const [show, setShow] = useState(false);
@@ -51,6 +51,12 @@ const Cart = () => {
 
     setData(updatedData);
   }
+
+  const handlePayment = () => {
+      alert('puede pagar');
+  }
+
+  
 
   return (
     <div className="container my-5">
@@ -101,7 +107,7 @@ const Cart = () => {
         <p className="fs-1 text-end">
           <b>Total:</b> ${new Intl.NumberFormat('es-CL').format(total)}
         </p>
-        <button className="btn cart-btn btn-outline-dark btn-sm mt-3 btn-end-shop">Finalizar Compra</button>
+        <button className="btn cart-btn btn-outline-dark btn-sm mt-3 btn-end-shop" disabled={!token} onClick={() => handlePayment}>Finalizar Compra</button>
       </div>
     </div>
   );
