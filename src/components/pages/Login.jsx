@@ -1,26 +1,48 @@
-import React, { useState } from 'react'
+import React, { useState, useContext} from 'react'
 import { validateEmail } from "./Register.jsx";
+import { TokenContext } from '../context/Context.jsx';
+import { useNavigate } from 'react-router-dom';
 
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState({
-    value: "",
-    isTouched: false,
-  });
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState('');
+
+  const { login } = useContext(TokenContext);
+  const navigate = useNavigate();
 
   const clearForm = () => {
     setEmail("");
-    setPassword({
-      value: "",
-      isTouched: false,
-    });
+    setPassword("");
+    setMessage("");
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert("Authentication successful!");
-    clearForm();
+
+    if (!email || !password) {
+      setMessage('Todos los campos son obligatorios.');
+      return;
+    }
+    if (password.length < 6) {
+      setMessage('La contraseña debe tener al menos 6 caracteres.');
+      return;
+    }
+
+    try {
+      const success = await login(email, password);
+      console.log('SUCCES', success)
+      if (success) {
+        navigate('/profile');
+        console.log("Authentication successful!");
+        setMessage("");
+      } else {
+        setMessage('Credenciales incorrectas.');
+      }
+    } catch (error) {
+      setMessage('Error al iniciar sesión. Intenta de nuevo.');
+    }
   };
 
   const getIsFormValid = () => {
@@ -49,18 +71,21 @@ const LoginPage = () => {
           <div className="col-12 mb-3">
             <label for="password" className="form-label">Contraseña <sup>*</sup></label>
             <input type="password" id="password" className="form-control"
-              value={password.value}
+              value={password}
               onChange={(e) => {
-                setPassword({ ...password, value: e.target.value });
-              }}
-              onBlur={() => {
-                setPassword({ ...password, isTouched: true });
+                setPassword(e.target.value);
               }}
               placeholder="Ingresa tu contraseña"
               required />
           </div>
 
           <button type="submit" className="btn btn-dark btn-sm">Login</button>
+          <br/>
+          { message !== '' ? 
+            <p className="error-message">{message}</p>
+            : null  
+          } 
+          
 
         </form>
       </div>

@@ -7,6 +7,15 @@
   width: 100%;
 }
 
+.imagen_feliz {
+  background-image: url('./assets/img/pizza_happy.png');
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 320px;
+  width: 100%;
+}
+
 header {
   background-image: url('./assets/Header.jpg');
   background-position: center;

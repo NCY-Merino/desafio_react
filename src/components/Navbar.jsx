@@ -21,7 +21,7 @@ const Navbar = () => {
 
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
           <Link className="btn btn-outline-light btn-sm me-md-2" to="/">🍕 Home</Link>
-          <Link className="btn btn-outline-light btn-sm me-md-2" to="/login" onClick={handleLogin}>
+          <Link className="btn btn-outline-light btn-sm me-md-2" to="/login">
             {!token ? '🔐 Login' : '🔓 Logout'}
           </Link>
           {!token ?

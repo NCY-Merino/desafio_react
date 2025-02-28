@@ -68,3 +68,11 @@ Se agregan 2 context:
 - Se agrega llamado dinamico de pizza por id
 - Context de token 
 - redirección de paginas solicitadas
+
+## Hito 8 - Version 0.0.7
+Se agregan:
+- context user
+- Endpoint http://localhost:5000/api/checkouts
+- Endpoint http://localhost:5000/api/auth/login
+- Endpoint http://localhost:5000/api/auth/register
+- Endpoint http://localhost:5000/api/auth/me

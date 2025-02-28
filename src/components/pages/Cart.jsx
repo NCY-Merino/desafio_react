@@ -1,13 +1,14 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { PizzaContext , CartContext, TokenContext} from '../context/Context.jsx'; // Asegúrate de importar correctamente
+import { PizzaContext , CartContext, TokenContext} from '../context/Context.jsx';
 
 const Cart = () => {
   const { data, setData } = useContext(PizzaContext);
   const { totalContext, setTotalContext } = useContext(CartContext);
-  let {token} = useContext(TokenContext);
+  let { token } = useContext(TokenContext);
 
   const [total, setTotal] = useState(0);
   const [show, setShow] = useState(false);
+  const [message, setMessage] = useState("");
 
   useEffect(() => {
     fnTotal();
@@ -52,9 +53,42 @@ const Cart = () => {
     setData(updatedData);
   }
 
-  const handlePayment = () => {
-      alert('puede pagar');
-  }
+  const handleCheckout = async () => {
+    if (!token) {
+      setMessage("Por favor, inicia sesión para realizar la compra.");
+      return; 
+    }
+
+    try {
+      const response = await fetch("http://localhost:5000/api/checkouts", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`, 
+        },
+        body: JSON.stringify( data ),
+      });
+
+      if (!response.ok) {
+        throw new Error("Error al procesar la compra.");
+      }
+      setMessage('ok');
+      clearCart(); 
+    } catch (error) {
+      setMessage('error');
+    }
+  };
+
+  const clearCart = () => {
+    setData([]);
+    setTimeout(() => {
+      setMessage("");
+    }, 3000);
+  };
+
+  const handleRetry = () => {
+    setMessage('');
+  };
 
   
 
@@ -62,11 +96,11 @@ const Cart = () => {
     <div className="container my-5">
       <h2 className="title-page mb-5">Carrito de Compras</h2>
 
-      <div className={!show ? 'd-flex justify-content-center align-items-center empty-content' : 'hidden'}>
+      <div className={!show && message === "" ? 'd-flex justify-content-center align-items-center empty-content' : 'hidden'}>
         El 🛒 esta vacío
       </div>
 
-      <div className={show ? 'min-heigth-content' : 'hidden'}>
+      <div className={show && message === "" ? 'min-heigth-content' : 'hidden'}>
         <table className="table table-striped mt-5 mb-5">
           <thead>
             <tr>
@@ -103,12 +137,34 @@ const Cart = () => {
         </table>
       </div>
 
+      { message === "" ? 
       <div className="d-flex flex-column mt-5 justify-content-end align-items-end">
         <p className="fs-1 text-end">
           <b>Total:</b> ${new Intl.NumberFormat('es-CL').format(total)}
         </p>
-        <button className="btn cart-btn btn-outline-dark btn-sm mt-3 btn-end-shop" disabled={!token} onClick={() => handlePayment}>Finalizar Compra</button>
+        <button type="button" className="btn cart-btn btn-outline-dark btn-sm mt-3 btn-end-shop" onClick={handleCheckout} disabled={!token}>Finalizar Compra</button>
       </div>
+      : 
+      
+      <div>{message === 'ok' ? 
+          <>
+            <div class="alert alert-success" role="alert">
+              Compra realizada con exito
+            </div>
+
+            <div className="imagen_feliz"></div>
+          </>
+          : 
+          <>
+            <div class="alert alert-danger" role="alert">
+              Tuvimos un error al procesar la compra
+            </div>
+            <button type="button" className="btn cart-btn btn-outline-dark btn-sm mt-3 btn-end-shop" onClick={handleRetry} >Reintentar</button>
+          </>
+        }
+      </div> 
+      
+      }
     </div>
   );
 };

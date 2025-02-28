@@ -22,15 +22,8 @@ export const validateEmail = (email) => {
 const RegisterPage = () => {
 
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState({
-    value: "",
-    isTouched: false,
-  });
-
-  const [rePassword, setRePassword] = useState({
-    value: "",
-    isTouched: false,
-  });
+  const [password, setPassword] = useState("");
+  const [rePassword, setRePassword] = useState("");
 
   const getIsFormValid = () => {
     return (
@@ -41,17 +34,10 @@ const RegisterPage = () => {
     )
   };
 
-
   const clearForm = () => {
     setEmail("");
-    setPassword({
-      value: "",
-      isTouched: false,
-    });
-    setRePassword({
-      value: "",
-      isTouched: false,
-    });
+    setPassword("");
+    setRePassword("");
   };
 
   const handleSubmit = (e) => {
@@ -79,16 +65,13 @@ const RegisterPage = () => {
           <div className="col-12 mb-3">
             <label for="password" className="form-label">Contraseña <sup>*</sup></label>
             <input type="password" id="password" className="form-control"
-              value={password.value}
+              value={password}
               onChange={(e) => {
-                setPassword({ ...password, value: e.target.value });
-              }}
-              onBlur={() => {
-                setPassword({ ...password, isTouched: true });
+                setPassword(e.target.value );
               }}
               required />
 
-            {password.isTouched && password.value.length < 6 ? (
+            {password.length < 6 ? (
               <PasswordErrorMessage />
             ) : null}
           </div>
@@ -96,29 +79,24 @@ const RegisterPage = () => {
           <div className="col-12 mb-3">
             <label for="password-confirm" className="form-label">Confirmar contraseña <sup>*</sup></label>
             <input type="password" id="password-confirm" className="form-control"
-              value={rePassword.value}
+              value={rePassword}
               onChange={(e) => {
-                setRePassword({ ...rePassword, value: e.target.value });
-              }}
-              onBlur={() => {
-                setRePassword({ ...rePassword, isTouched: true });
+                setRePassword(e.target.value );
               }}
               required />
 
-            {rePassword.isTouched && rePassword.value.length < 6 ? (
+            { rePassword.length < 6 ? (
               <PasswordErrorMessage />
             ) : null}
           </div>
 
           {
-            password.isTouched &&
-              rePassword.isTouched &&
-              rePassword.value !== password.value ? (
+              rePassword !== password ? (
               <PasswordEqualErrorMessage />
             ) : null
           }
 
-          <button type="button" className="btn btn-dark btn-sm">Enviar</button>
+          <button type="submit" className="btn btn-dark btn-sm">Enviar</button>
 
         </form>
       </div>
